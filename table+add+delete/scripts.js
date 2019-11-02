@@ -22,18 +22,9 @@ function Start() {
             text = "<tr><td>" + (Number(d) + Number(1)) + "</td><td>" + data[d].id + "</td><td>" + data[d].name + "</td><td>" + data[d].age + "</td><tr>"
             document.getElementById("myTable").insertRow(document.getElementById("myTable").rows.length).innerHTML = text
         }
-        Tr_even()
+        ReTable()
     }
     SelectedRow()
-}
-
-function Tr_even() {
-    var table = document.getElementById("myTable")
-    for (let r = 1; r < table.rows.length; r++) {
-        if (r % 2 != 0) {
-            table.rows[r].classList.toggle("tr_even");
-        }
-    }
 }
 
 function ReTable(){
@@ -45,6 +36,12 @@ function ReTable(){
     for (let d in data) {
         text = "<tr><td>" + (Number(d) + Number(1)) + "</td><td>" + data[d].id + "</td><td>" + data[d].name + "</td><td>" + data[d].age + "</td><tr>"
         document.getElementById("myTable").insertRow(document.getElementById("myTable").rows.length).innerHTML = text
+    }
+    var table = document.getElementById("myTable")
+    for (let r = 1; r < table.rows.length; r++) {
+        if (r % 2 != 0) {
+            table.rows[r].classList.toggle("tr_even");
+        }
     }
 }
 
@@ -92,7 +89,6 @@ $(document).ready(function () {
                 "age": age
             })
             ReTable()
-            Tr_even()
         } else {
             alert("Name not english or Not have parameter")
         }
@@ -101,7 +97,6 @@ $(document).ready(function () {
     $('#delete').click(function () {
         data.splice(index - 1, 1);
         ReTable()
-        Tr_even()
         SelectedRow()
     });
 });
