@@ -29,11 +29,13 @@ function SelectedRow() {
     var table = document.getElementById("myTable")
     for (let r in table.rows) {
         table.rows[r].onclick = function () {
-            if (typeof index !== "undefined") {
+            if (typeof index !== "undefined" && index != 0) {
                 table.rows[index].classList.toggle("selected");
             }
             index = this.rowIndex
-            this.classList.toggle("selected")
+            if (index != 0) {
+                this.classList.toggle("selected")
+            }
         }
     }
 }
@@ -42,11 +44,11 @@ function CheckEnglish(name) {
     for (var n = 0; n < name.length; n++) {
         var check = 0
         for (var e = 0; e < english.length; e++) {
-            if(name[n] == english[e]){
+            if (name[n] == english[e]) {
                 var check = 1
             }
         }
-        if(check != 1){
+        if (check != 1) {
             return false
         }
     }

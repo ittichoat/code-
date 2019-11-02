@@ -16,6 +16,7 @@ tr{
   
 .selected{
     background-color: #a8601c;
+    color: red;
 }
 
 tr:nth-child(even) {
