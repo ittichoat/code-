@@ -11,8 +11,9 @@ var data = [{
     "name": "peang",
     "age": 20
 }]
-var english = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
 var index = 0
+
 function Start() {
     var row_length = document.getElementById("myTable").rows.length;
     if (row_length < 2) {
@@ -64,6 +65,7 @@ function SelectedRow() {
 }
 
 function CheckEnglish(name) {
+    var english = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     for (var n = 0; n < name.length; n++) {
         var check = 0
         for (var e = 0; e < english.length; e++) {
