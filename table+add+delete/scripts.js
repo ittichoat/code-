@@ -87,9 +87,9 @@ $(document).ready(function () {
             }
         }else if(!CheckOnly(name,english)){
             alert("Name english only!!")
-        }else if(CheckOnly(id,engnum)){
+        }else if(!CheckOnly(id,engnum)){
             alert("ID english or number only!!")
-        }else if(CheckOnly(age,number)){
+        }else if(!CheckOnly(age,number)){
             alert("Age number only and Age greater than or equal to zero!!")
         }else {
             alert("Not have parameter")
