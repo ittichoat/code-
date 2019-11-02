@@ -15,8 +15,7 @@ tr{
 }
   
 .selected{
-    background-color: #08e069;
-    color: red;
+    background-color: red;
 }
 
 .tr_even{

@@ -17,31 +17,24 @@ var index = 0
 function Start() {
     var row_length = document.getElementById("myTable").rows.length;
     if (row_length < 2) {
-        var text = ""
-        for (let d in data) {
-            text = "<tr><td>" + (Number(d) + Number(1)) + "</td><td>" + data[d].id + "</td><td>" + data[d].name + "</td><td>" + data[d].age + "</td><tr>"
-            document.getElementById("myTable").insertRow(document.getElementById("myTable").rows.length).innerHTML = text
-        }
         ReTable()
     }
     SelectedRow()
 }
 
-function ReTable(){
+function ReTable() {
     var table = document.getElementById("myTable")
     for (var r = table.rows.length; r > 1; r--) {
         document.getElementById("myTable").deleteRow(r - 1);
     }
-    var text = ""
     for (let d in data) {
-        text = "<tr><td>" + (Number(d) + Number(1)) + "</td><td>" + data[d].id + "</td><td>" + data[d].name + "</td><td>" + data[d].age + "</td><tr>"
-        document.getElementById("myTable").insertRow(document.getElementById("myTable").rows.length).innerHTML = text
-    }
-    var table = document.getElementById("myTable")
-    for (let r = 1; r < table.rows.length; r++) {
-        if (r % 2 != 0) {
-            table.rows[r].classList.toggle("tr_even");
+        if(d%2 == 0){
+            var text = "<tr bgcolor=\"yellow\"><td>" + (Number(d) + Number(1)) + "</td><td>" + data[d].id + "</td><td>" + data[d].name + "</td><td>" + data[d].age + "</td></tr>"
         }
+        else{
+            var text = "<tr><td>" + (Number(d) + Number(1)) + "</td><td>" + data[d].id + "</td><td>" + data[d].name + "</td><td>" + data[d].age + "</td></tr>"
+        }
+        $("#myTable").append(text)
     }
 }
 
