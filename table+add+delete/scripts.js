@@ -11,9 +11,8 @@ var data = [{
     "name": "peang",
     "age": 20
 }]
-var index = 0
 var english = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
+var index = 0
 function Start() {
     var row_length = document.getElementById("myTable").rows.length;
     if (row_length < 2) {
@@ -22,12 +21,36 @@ function Start() {
             text = "<tr><td>" + (Number(d) + Number(1)) + "</td><td>" + data[d].id + "</td><td>" + data[d].name + "</td><td>" + data[d].age + "</td><tr>"
             document.getElementById("myTable").insertRow(document.getElementById("myTable").rows.length).innerHTML = text
         }
+        Tr_even()
+    }
+    SelectedRow()
+}
+
+function Tr_even() {
+    var table = document.getElementById("myTable")
+    for (let r = 1; r < table.rows.length; r++) {
+        if (r % 2 != 0) {
+            table.rows[r].classList.toggle("tr_even");
+        }
+    }
+}
+
+function AddTable(){
+    var table = document.getElementById("myTable")
+    for (var r = table.rows.length; r > 1; r--) {
+        document.getElementById("myTable").deleteRow(r - 1);
+    }
+    var text = ""
+    for (let d in data) {
+        text = "<tr><td>" + (Number(d) + Number(1)) + "</td><td>" + data[d].id + "</td><td>" + data[d].name + "</td><td>" + data[d].age + "</td><tr>"
+        document.getElementById("myTable").insertRow(document.getElementById("myTable").rows.length).innerHTML = text
     }
 }
 
 function SelectedRow() {
     var table = document.getElementById("myTable")
-    for (let r in table.rows) {
+    index = 0
+    for (let r = 1; r < table.rows.length; r++) {
         table.rows[r].onclick = function () {
             if (typeof index !== "undefined" && index != 0) {
                 table.rows[index].classList.toggle("selected");
@@ -60,33 +83,26 @@ $(document).ready(function () {
         var name = $("#name").val();
         var id = $("#id").val();
         var age = $("#age").val();
-        console.log(CheckEnglish(name))
         if (CheckEnglish(name) && id != "" && age != "") {
-            var text = "<tr><td>" + (Number(data.length) + Number(1)) + "</td><td>" + id + "</td><td>" + name + "</td><td>" + age + "</td><tr>"
             data.push({
                 "id": id,
                 "name": name,
                 "age": age
             })
-            $("#myTable").append(text)
+            AddTable()
+            Tr_even()
         } else {
             alert("Name not english or Not have parameter")
         }
+        SelectedRow()
     });
     $('#delete').click(function () {
-        data.splice(index - 1, index - 1);
-        var table = document.getElementById("myTable")
-        for (var r = table.rows.length; r > 1; r--) {
-            document.getElementById("myTable").deleteRow(r - 1);
-        }
-        var text = ""
-        for (let d in data) {
-            text = "<tr><td>" + (Number(d) + Number(1)) + "</td><td>" + data[d].id + "</td><td>" + data[d].name + "</td><td>" + data[d].age + "</td><tr>"
-            document.getElementById("myTable").insertRow(document.getElementById("myTable").rows.length).innerHTML = text
-        }
+        data.splice(index - 1, 1);
+        AddTable()
+        Tr_even()
+        SelectedRow()
     });
 });
 
 Start()
-SelectedRow()
 

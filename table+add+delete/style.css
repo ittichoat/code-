@@ -15,17 +15,14 @@ tr{
 }
   
 .selected{
-    background-color: #a8601c;
+    background-color: #08e069;
     color: red;
 }
 
-tr:nth-child(even) {
-    background-color: #e9eb6d;
+.tr_even{
+    background-color: yellow;
 }
 
-tr:nth-child(odd) {
-    background-color: #ffffff;
-}
 
 
 
