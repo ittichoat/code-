@@ -28,10 +28,10 @@ function ReTable() {
         document.getElementById("myTable").deleteRow(r - 1);
     }
     for (let d in data) {
-        if(d%2 == 0){
-            var text = "<tr bgcolor=\"yellow\"><td>" + (Number(d) + Number(1)) + "</td><td>" + data[d].id + "</td><td>" + data[d].name + "</td><td>" + data[d].age + "</td></tr>"
+        if (d % 2 == 0) {
+            var text = "<tr bgcolor=\"#dddddd\"><td>" + (Number(d) + Number(1)) + "</td><td>" + data[d].id + "</td><td>" + data[d].name + "</td><td>" + data[d].age + "</td></tr>"
         }
-        else{
+        else {
             var text = "<tr><td>" + (Number(d) + Number(1)) + "</td><td>" + data[d].id + "</td><td>" + data[d].name + "</td><td>" + data[d].age + "</td></tr>"
         }
         $("#myTable").append(text)
