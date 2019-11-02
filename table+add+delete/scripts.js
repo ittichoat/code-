@@ -19,7 +19,7 @@ function Start() {
     if (row_length < 2) {
         ReTable()
     }
-    SelectedRow()
+    
 }
 
 function ReTable() {
@@ -36,6 +36,7 @@ function ReTable() {
         }
         $("#myTable").append(text)
     }
+    SelectedRow()
 }
 
 function SelectedRow() {
@@ -54,17 +55,14 @@ function SelectedRow() {
     }
 }
 
-function CheckEnglish(name) {
-    var english = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    for (var n = 0; n < name.length; n++) {
-        var check = 0
-        for (var e = 0; e < english.length; e++) {
-            if (name[n] == english[e]) {
-                var check = 1
+function CheckOnly(text,check) {
+    for (var t = 0; t < text.length; t++) {
+        for (var c = 0; c < check.length; c++) {
+            if (text[t] == check[c]) {
+                break
+            } else if (c + 1 == check.length) {
+                return false
             }
-        }
-        if (check != 1) {
-            return false
         }
     }
     return true
@@ -72,25 +70,34 @@ function CheckEnglish(name) {
 
 $(document).ready(function () {
     $('#add').click(function () {
+        var english = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        var number = "0123456789"
+        var engnum = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var name = $("#name").val();
         var id = $("#id").val();
         var age = $("#age").val();
-        if (CheckEnglish(name) && id != "" && age != "") {
-            data.push({
-                "id": id,
-                "name": name,
-                "age": age
-            })
-            ReTable()
-        } else {
-            alert("Name not english or Not have parameter")
+        if (CheckOnly(name,english) && CheckOnly(id,engnum) && CheckOnly(age,number) && id != "" && age != "") {
+            if (Number(age) >= 0) {
+                data.push({
+                    "id": id,
+                    "name": name,
+                    "age": age
+                })
+                ReTable()
+            }
+        }else if(!CheckOnly(name,english)){
+            alert("Name english only!!")
+        }else if(CheckOnly(id,engnum)){
+            alert("ID english or number only!!")
+        }else if(CheckOnly(age,number)){
+            alert("Age number only and Age greater than or equal to zero!!")
+        }else {
+            alert("Not have parameter")
         }
-        SelectedRow()
     });
     $('#delete').click(function () {
         data.splice(index - 1, 1);
         ReTable()
-        SelectedRow()
     });
 });
 
