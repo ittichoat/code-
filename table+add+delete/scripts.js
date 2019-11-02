@@ -12,6 +12,7 @@ var data = [{
     "age": 20
 }]
 var index = 0
+var english = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 function Start() {
     var row_length = document.getElementById("myTable").rows.length;
@@ -37,23 +38,41 @@ function SelectedRow() {
     }
 }
 
+function CheckEnglish(name) {
+    for (var n = 0; n < name.length; n++) {
+        var check = 0
+        for (var e = 0; e < english.length; e++) {
+            if(name[n] == english[e]){
+                var check = 1
+            }
+        }
+        if(check != 1){
+            return false
+        }
+    }
+    return true
+}
+
 $(document).ready(function () {
     $('#add').click(function () {
         var name = $("#name").val();
         var id = $("#id").val();
         var age = $("#age").val();
-        var text = "<tr><td>" + (Number(data.length) + Number(1)) + "</td><td>" + id + "</td><td>" + name + "</td><td>" + age + "</td><tr>"
-        data.push({
-            "id": id,
-            "name": name,
-            "age": age
-        })
-        $("#myTable").append(text)
+        console.log(CheckEnglish(name))
+        if (CheckEnglish(name) && id != "" && age != "") {
+            var text = "<tr><td>" + (Number(data.length) + Number(1)) + "</td><td>" + id + "</td><td>" + name + "</td><td>" + age + "</td><tr>"
+            data.push({
+                "id": id,
+                "name": name,
+                "age": age
+            })
+            $("#myTable").append(text)
+        } else {
+            alert("Name not english or Not have parameter")
+        }
     });
     $('#delete').click(function () {
         data.splice(index - 1, index - 1);
-        console.log(index)
-        console.log(data)
         var table = document.getElementById("myTable")
         for (var r = table.rows.length; r > 1; r--) {
             document.getElementById("myTable").deleteRow(r - 1);
