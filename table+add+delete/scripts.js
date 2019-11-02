@@ -36,7 +36,7 @@ function Tr_even() {
     }
 }
 
-function AddTable(){
+function ReTable(){
     var table = document.getElementById("myTable")
     for (var r = table.rows.length; r > 1; r--) {
         document.getElementById("myTable").deleteRow(r - 1);
@@ -91,7 +91,7 @@ $(document).ready(function () {
                 "name": name,
                 "age": age
             })
-            AddTable()
+            ReTable()
             Tr_even()
         } else {
             alert("Name not english or Not have parameter")
@@ -100,7 +100,7 @@ $(document).ready(function () {
     });
     $('#delete').click(function () {
         data.splice(index - 1, 1);
-        AddTable()
+        ReTable()
         Tr_even()
         SelectedRow()
     });
